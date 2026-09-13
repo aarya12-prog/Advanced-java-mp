@@ -1,0 +1,98 @@
+/* success.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main Success Box */
+.success-container {
+    width: 420px;
+    padding: 45px 35px;
+    background: #ffffff;
+
+    text-align: center;
+
+    border: 2px solid #e60000;
+    border-radius: 15px;
+
+    box-shadow: 0 10px 30px rgba(230, 0, 0, 0.15);
+}
+
+/* Success Check Icon */
+.success-icon {
+    width: 80px;
+    height: 80px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #e60000;
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    font-size: 48px;
+    font-weight: bold;
+}
+
+/* Heading */
+.success-container h1 {
+    color: #e60000;
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+/* Message */
+.success-container p {
+    color: #555555;
+    font-size: 16px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Continue Button */
+.success-container button {
+    width: 100%;
+    padding: 14px;
+
+    background: #e60000;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+/* Button Hover */
+.success-container button:hover {
+    background: #b80000;
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 15px rgba(230, 0, 0, 0.25);
+}
+
+/* Button Click */
+.success-container button:active {
+    transform: translateY(0);
+}
