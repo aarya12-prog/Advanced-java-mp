@@ -1,12 +1,12 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.inventory.model.inventory" %>
+<%@ page import="com.inventory.model.Reorder" %>
 
 <!DOCTYPE html>
 <html>
 
 <head>
 
-<title>Low Stock Reorder Alert</title>
+<title>Reorder History</title>
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,33 +23,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     box-sizing:border-box;
 }
 
-html,
-body{
+html,body{
     width:100%;
     min-height:100%;
 }
 
-
-/* =========================================================
-   BODY
-========================================================= */
-
 body{
-
     font-family:"Segoe UI",Arial,sans-serif;
-
     background:#12090C;
-
     color:#FFF8EA;
-
     overflow-x:hidden;
-
 }
 
 
 /* =========================================================
-   HONEYCOMB GRID
-   SAME AS REORDER HISTORY
+   DARK INVENTORY LASER BACKGROUND
    STATIC - NO MOTION
 ========================================================= */
 
@@ -58,22 +46,20 @@ body::before{
     content:"";
 
     position:fixed;
-
     inset:0;
 
     z-index:0;
-
     pointer-events:none;
 
     background-color:#12090C;
+
+    /* CONTINUOUS REAL HONEYCOMB */
 
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='156' viewBox='0 0 180 156'%3E%3Cg fill='none' stroke='%23D1A64A' stroke-width='1.5' opacity='.30'%3E%3Cpath d='M45 1 L135 1 L180 78 L135 155 L45 155 L0 78 Z'/%3E%3Cpath d='M-45 1 L45 1 L90 78 L45 155 L-45 155 L-90 78 Z'/%3E%3Cpath d='M135 1 L225 1 L270 78 L225 155 L135 155 L90 78 Z'/%3E%3C/g%3E%3C/svg%3E");
 
     background-repeat:repeat;
 
     background-size:180px 156px;
-
-    background-position:0 0;
 
     background-attachment:fixed;
 
@@ -82,7 +68,6 @@ body::before{
 
 /* =========================================================
    INVENTORY LASER ART
-   SAME AS REORDER HISTORY
    STATIC - NO MOTION
 ========================================================= */
 
@@ -91,22 +76,18 @@ body::after{
     content:"";
 
     position:fixed;
-
     inset:0;
 
     z-index:0;
-
     pointer-events:none;
 
     opacity:.42;
 
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='650' viewBox='0 0 900 650'%3E%3Cdefs%3E%3Cfilter id='glow'%3E%3CfeGaussianBlur stdDeviation='3' result='blur'/%3E%3CfeMerge%3E%3CfeMergeNode in='blur'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Cg fill='none' stroke='%23D5A94F' stroke-width='2' opacity='.70' filter='url(%23glow)'%3E%3Crect x='40' y='65' width='125' height='90' rx='4'/%3E%3Cpath d='M40 95 L102 128 L165 95 M102 128V155 M102 65V128'/%3E%3Cpath d='M63 78L102 99L142 78'/%3E%3Cpath d='M220 70V150 M228 70V150 M237 70V150 M250 70V150 M258 70V150 M270 70V150 M283 70V150 M292 70V150 M302 70V150'/%3E%3Cpath d='M210 160H312'/%3E%3Crect x='370' y='55' width='105' height='105' rx='4'/%3E%3Crect x='385' y='70' width='27' height='27'/%3E%3Crect x='433' y='70' width='27' height='27'/%3E%3Crect x='385' y='118' width='27' height='27'/%3E%3Cpath d='M433 118H444V129H457V145H433V137H442V129H433Z'/%3E%3Crect x='555' y='60' width='105' height='105' rx='10'/%3E%3Crect x='580' y='85' width='55' height='55' rx='5'/%3E%3Cpath d='M570 60V40 M590 60V40 M610 60V40 M630 60V40 M570 165V185 M590 165V185 M610 165V185 M630 165V185 M555 80H535 M555 102H535 M555 124H535 M555 146H535 M660 80H680 M660 102H680 M660 124H680 M660 146H680'/%3E%3Cpath d='M40 245H180L215 280H350L390 245H535L575 285H760'/%3E%3Cpath d='M105 245V215H180 M350 280V330H470 M535 245V205H630'/%3E%3Ccircle cx='180' cy='245' r='6' fill='%23D5A94F'/%3E%3Ccircle cx='350' cy='280' r='6' fill='%23D5A94F'/%3E%3Ccircle cx='535' cy='245' r='6' fill='%23D5A94F'/%3E%3Ccircle cx='760' cy='285' r='6' fill='%23D5A94F'/%3E%3Cpath d='M45 390H300 M45 465H300 M45 540H300'/%3E%3Cpath d='M60 370V555 M285 370V555'/%3E%3Crect x='80' y='405' width='60' height='42'/%3E%3Crect x='160' y='405' width='95' height='42'/%3E%3Crect x='75' y='480' width='90' height='42'/%3E%3Crect x='185' y='480' width='70' height='42'/%3E%3Crect x='390' y='375' width='135' height='175' rx='8'/%3E%3Crect x='425' y='360' width='65' height='30' rx='8'/%3E%3Cpath d='M415 425H500 M415 455H500 M415 485H485'/%3E%3Cpath d='M415 425L424 434L440 416 M415 455L424 464L440 446'/%3E%3Crect x='600' y='395' width='150' height='90' rx='5'/%3E%3Cpath d='M615 415H680 M615 435H705 M615 455H665'/%3E%3Cpath d='M685 410V470 M692 410V470 M700 410V470 M710 410V470 M720 410V470'/%3E%3Cpath d='M590 530H650V570H715V615H850'/%3E%3Cpath d='M650 530V500H700 M715 570V540H770'/%3E%3Ccircle cx='650' cy='530' r='5' fill='%23D5A94F'/%3E%3Ccircle cx='715' cy='570' r='5' fill='%23D5A94F'/%3E%3Ccircle cx='850' cy='615' r='5' fill='%23D5A94F'/%3E%3C/g%3E%3C/svg%3E");
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='650' viewBox='0 0 900 650'%3E%3Cdefs%3E%3Cfilter id='glow'%3E%3CfeGaussianBlur stdDeviation='3' result='blur'/%3E%3CfeMerge%3E%3CfeMergeNode in='blur'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Cg fill='none' stroke='%23D5A94F' stroke-width='2' opacity='.70' filter='url(%23glow)'%3E%3C!-- warehouse box --%3E%3Crect x='40' y='65' width='125' height='90' rx='4'/%3E%3Cpath d='M40 95 L102 128 L165 95 M102 128V155 M102 65V128'/%3E%3Cpath d='M63 78L102 99L142 78'/%3E%3C!-- barcode --%3E%3Cpath d='M220 70V150 M228 70V150 M237 70V150 M250 70V150 M258 70V150 M270 70V150 M283 70V150 M292 70V150 M302 70V150'/%3E%3Cpath d='M210 160H312'/%3E%3C!-- QR --%3E%3Crect x='370' y='55' width='105' height='105' rx='4'/%3E%3Crect x='385' y='70' width='27' height='27'/%3E%3Crect x='433' y='70' width='27' height='27'/%3E%3Crect x='385' y='118' width='27' height='27'/%3E%3Cpath d='M433 118H444V129H457V145H433V137H442V129H433Z'/%3E%3C!-- microchip --%3E%3Crect x='555' y='60' width='105' height='105' rx='10'/%3E%3Crect x='580' y='85' width='55' height='55' rx='5'/%3E%3Cpath d='M570 60V40 M590 60V40 M610 60V40 M630 60V40 M570 165V185 M590 165V185 M610 165V185 M630 165V185 M555 80H535 M555 102H535 M555 124H535 M555 146H535 M660 80H680 M660 102H680 M660 124H680 M660 146H680'/%3E%3C!-- laser network --%3E%3Cpath d='M40 245H180L215 280H350L390 245H535L575 285H760'/%3E%3Cpath d='M105 245V215H180 M350 280V330H470 M535 245V205H630'/%3E%3Ccircle cx='180' cy='245' r='6' fill='%23D5A94F'/%3E%3Ccircle cx='350' cy='280' r='6' fill='%23D5A94F'/%3E%3Ccircle cx='535' cy='245' r='6' fill='%23D5A94F'/%3E%3Ccircle cx='760' cy='285' r='6' fill='%23D5A94F'/%3E%3C!-- shelves --%3E%3Cpath d='M45 390H300 M45 465H300 M45 540H300'/%3E%3Cpath d='M60 370V555 M285 370V555'/%3E%3Crect x='80' y='405' width='60' height='42'/%3E%3Crect x='160' y='405' width='95' height='42'/%3E%3Crect x='75' y='480' width='90' height='42'/%3E%3Crect x='185' y='480' width='70' height='42'/%3E%3C!-- clipboard --%3E%3Crect x='390' y='375' width='135' height='175' rx='8'/%3E%3Crect x='425' y='360' width='65' height='30' rx='8'/%3E%3Cpath d='M415 425H500 M415 455H500 M415 485H485'/%3E%3Cpath d='M415 425L424 434L440 416 M415 455L424 464L440 446'/%3E%3C!-- package label --%3E%3Crect x='600' y='395' width='150' height='90' rx='5'/%3E%3Cpath d='M615 415H680 M615 435H705 M615 455H665'/%3E%3Cpath d='M685 410V470 M692 410V470 M700 410V470 M710 410V470 M720 410V470'/%3E%3C!-- circuit path --%3E%3Cpath d='M590 530H650V570H715V615H850'/%3E%3Cpath d='M650 530V500H700 M715 570V540H770'/%3E%3Ccircle cx='650' cy='530' r='5' fill='%23D5A94F'/%3E%3Ccircle cx='715' cy='570' r='5' fill='%23D5A94F'/%3E%3Ccircle cx='850' cy='615' r='5' fill='%23D5A94F'/%3E%3C/g%3E%3C/svg%3E");
 
     background-repeat:repeat;
 
     background-size:900px 650px;
-
-    background-position:0 0;
 
     background-attachment:fixed;
 
@@ -125,7 +106,6 @@ body::after{
     position:fixed;
 
     top:18%;
-
     left:-5%;
 
     width:110%;
@@ -162,7 +142,6 @@ body::after{
     position:fixed;
 
     bottom:20%;
-
     left:-5%;
 
     width:110%;
@@ -209,8 +188,8 @@ body::after{
 
 
 /* =========================================================
-   MAIN CARD
-   SAME WIDTH AS REORDER HISTORY
+   GLASS MAIN CARD
+   STATIC - FLOATING ANIMATION REMOVED
 ========================================================= */
 
 .card{
@@ -218,8 +197,6 @@ body::after{
     position:relative;
 
     z-index:2;
-
-    width:100%;
 
     max-width:1180px;
 
@@ -254,13 +231,14 @@ body::after{
 
         inset 0 -1px 0 rgba(255,255,255,.25);
 
+    /* NO ANIMATION */
     animation:none;
 
 }
 
 
 /* =========================================================
-   CARD HIGHLIGHT
+   GLASS HIGHLIGHT
 ========================================================= */
 
 .card::before{
@@ -321,10 +299,6 @@ body::after{
 }
 
 
-/* =========================================================
-   ICON
-========================================================= */
-
 .icon{
 
     width:50px;
@@ -360,10 +334,6 @@ body::after{
 
 }
 
-
-/* =========================================================
-   TITLE
-========================================================= */
 
 h1{
 
@@ -488,8 +458,6 @@ h1 span{
 
     font-weight:750;
 
-    white-space:nowrap;
-
 }
 
 
@@ -511,7 +479,7 @@ h1 span{
 
 
 /* =========================================================
-   TABLE CONTAINER
+   TABLE
 ========================================================= */
 
 .table-container{
@@ -519,8 +487,6 @@ h1 span{
     position:relative;
 
     z-index:3;
-
-    width:100%;
 
     border:1px solid rgba(205,187,155,.95);
 
@@ -541,10 +507,6 @@ h1 span{
 
 }
 
-
-/* =========================================================
-   TABLE
-========================================================= */
 
 table{
 
@@ -585,8 +547,6 @@ th{
 
     letter-spacing:.6px;
 
-    white-space:nowrap;
-
 }
 
 
@@ -601,8 +561,6 @@ td{
     font-weight:500;
 
     border-bottom:1px solid #E9DDCB;
-
-    white-space:nowrap;
 
 }
 
@@ -635,10 +593,6 @@ tbody tr:last-child td{
 }
 
 
-/* =========================================================
-   TABLE TEXT COLORS
-========================================================= */
-
 td:first-child{
 
     color:#A47725;
@@ -666,33 +620,6 @@ td:nth-child(3){
 }
 
 
-td:nth-child(4){
-
-    color:#422D2E;
-
-    font-weight:650;
-
-}
-
-
-td:nth-child(5){
-
-    color:#422D2E;
-
-    font-weight:650;
-
-}
-
-
-td:nth-child(6){
-
-    color:#946C22;
-
-    font-weight:750;
-
-}
-
-
 /* =========================================================
    STATUS BADGES
 ========================================================= */
@@ -707,7 +634,7 @@ td:nth-child(6){
 
     gap:5px;
 
-    min-width:105px;
+    min-width:94px;
 
     padding:6px 14px;
 
@@ -719,14 +646,10 @@ td:nth-child(6){
 
     border:1px solid transparent;
 
-    white-space:nowrap;
-
 }
 
 
-/* LOW STOCK */
-
-.low{
+.requested{
 
     background:#FFF0C9;
 
@@ -737,22 +660,18 @@ td:nth-child(6){
 }
 
 
-/* CRITICAL */
+.processing{
 
-.critical{
+    background:#E8DFF0;
 
-    background:#F8D9D0;
+    color:#654275;
 
-    color:#8A3022;
-
-    border-color:#D88C7D;
+    border-color:#C5B0D0;
 
 }
 
 
-/* WARNING */
-
-.warning{
+.completed{
 
     background:#DDEEDB;
 
@@ -764,80 +683,10 @@ td:nth-child(6){
 
 
 /* =========================================================
-   REORDER BUTTON
-========================================================= */
-
-.btn{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:7px;
-
-    min-width:105px;
-
-    padding:8px 16px;
-
-    border-radius:20px;
-
-    border:1px solid #C69A48;
-
-    cursor:pointer;
-
-    color:#8B6116;
-
-    background:#FFF0C9;
-
-    font-size:11px;
-
-    font-weight:750;
-
-    box-shadow:none;
-
-    transition:.2s ease;
-
-}
-
-
-.btn:hover{
-
-    color:#FFF8EA;
-
-    background:
-        linear-gradient(
-            135deg,
-            #721F3B,
-            #5B162F
-        );
-
-    border-color:#5A152D;
-
-    box-shadow:
-
-        0 5px 14px rgba(91,20,43,.25),
-
-        0 0 8px rgba(198,154,72,.14);
-
-    transform:translateY(-1px);
-
-}
-
-
-.btn:active{
-
-    transform:translateY(0);
-
-}
-
-
-/* =========================================================
    EMPTY TABLE
 ========================================================= */
 
-td[colspan="8"]{
+td[colspan="5"]{
 
     color:#806C68;
 
@@ -851,10 +700,10 @@ td[colspan="8"]{
 
 
 /* =========================================================
-   RESPONSIVE
+   PROJECTOR / RESPONSIVE
 ========================================================= */
 
-@media(max-width:1100px){
+@media(max-width:900px){
 
     .header{
 
@@ -880,20 +729,6 @@ td[colspan="8"]{
 
     }
 
-
-    .table-container{
-
-        overflow-x:auto;
-
-    }
-
-
-    table{
-
-        min-width:1050px;
-
-    }
-
 }
 
 
@@ -911,8 +746,6 @@ td[colspan="8"]{
         padding:20px 16px;
 
         margin:8px auto;
-
-        border-radius:16px;
 
     }
 
@@ -936,28 +769,6 @@ td[colspan="8"]{
         width:44px;
 
         height:44px;
-
-        font-size:18px;
-
-    }
-
-
-    .tabs{
-
-        overflow-x:auto;
-
-    }
-
-
-    .tabs a{
-
-        min-width:115px;
-
-        padding:10px 12px;
-
-        font-size:11px;
-
-        white-space:nowrap;
 
     }
 
@@ -987,8 +798,7 @@ td[colspan="8"]{
 
 
 /* =========================================================
-   FINAL STATIC SAFETY
-   NOTHING MOVES
+   FINAL STATIC BACKGROUND SAFETY
 ========================================================= */
 
 body,
@@ -996,9 +806,7 @@ body::before,
 body::after,
 .page-wrapper::before,
 .page-wrapper::after,
-.card,
-.card::before,
-.card::after{
+.card{
 
     animation:none !important;
 
@@ -1017,9 +825,7 @@ body::after,
     <div class="card">
 
 
-        <!-- =================================================
-             HEADER
-        ================================================= -->
+        <!-- HEADER -->
 
         <div class="header">
 
@@ -1027,15 +833,14 @@ body::after,
 
                 <div class="icon">
 
-                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <i class="fa-solid fa-clock-rotate-left"></i>
 
                 </div>
-
 
                 <div>
 
                     <h1>
-                        Low Stock <span>Reorder Alert</span>
+                        Reorder <span>History</span>
                     </h1>
 
                 </div>
@@ -1043,15 +848,11 @@ body::after,
             </div>
 
 
-            <!-- =================================================
-                 NAVIGATION
-            ================================================= -->
+            <!-- NAVIGATION -->
 
             <div class="tabs">
 
-
-                <a href="ReorderServlet"
-                   class="active">
+                <a href="ReorderServlet">
 
                     <i class="fa-solid fa-triangle-exclamation"></i>
 
@@ -1060,7 +861,8 @@ body::after,
                 </a>
 
 
-                <a href="ReorderHistoryServlet">
+                <a href="ReorderHistoryServlet"
+                   class="active">
 
                     <i class="fa-solid fa-clock-rotate-left"></i>
 
@@ -1077,15 +879,12 @@ body::after,
 
                 </a>
 
-
             </div>
 
         </div>
 
 
-        <!-- =================================================
-             SECTION TITLE
-        ================================================= -->
+        <!-- SECTION -->
 
         <div class="section-title">
 
@@ -1093,7 +892,7 @@ body::after,
 
                 <i class="fa-solid fa-boxes-stacked"></i>
 
-                Items Requiring Reorder
+                Reorder Records
 
             </h2>
 
@@ -1102,14 +901,11 @@ body::after,
         </div>
 
 
-        <!-- =================================================
-             TABLE
-        ================================================= -->
+        <!-- TABLE -->
 
         <div class="table-container">
 
             <table>
-
 
                 <thead>
 
@@ -1118,31 +914,19 @@ body::after,
                         <th>#</th>
 
                         <th>
-                            Product ID
-                        </th>
-
-                        <th>
                             Product Name
                         </th>
 
                         <th>
-                            Current Qty
+                            Quantity
                         </th>
 
                         <th>
-                            Safety Stock
-                        </th>
-
-                        <th>
-                            Reorder Qty
+                            Date & Time
                         </th>
 
                         <th>
                             Status
-                        </th>
-
-                        <th>
-                            Action
                         </th>
 
                     </tr>
@@ -1152,195 +936,98 @@ body::after,
 
                 <tbody>
 
-
                 <%
 
-                List<inventory> list =
-                    (List<inventory>)request.getAttribute("lowStockItems");
+                List<Reorder> reorderList =
+                    (List<Reorder>)request.getAttribute("reorderList");
 
 
-                if(list != null && !list.isEmpty()){
+                if(reorderList != null && !reorderList.isEmpty()){
 
                     int i = 1;
 
 
-                    for(inventory item : list){
+                    for(Reorder r : reorderList){
+
+                        String status = "requested";
 
 
-                        String statusClass = "low";
+                        if("Processing".equalsIgnoreCase(r.getStatus())){
 
-                        String statusText = "Low Stock";
-
-
-                        if(item.getQuantity() <= 2){
-
-                            statusClass = "critical";
-
-                            statusText = "Critical Stock";
+                            status = "processing";
 
                         }
 
-                        else if(item.getQuantity() > item.getSafetyStock()){
+                        else if("Completed".equalsIgnoreCase(r.getStatus())){
 
-                            statusClass = "warning";
-
-                            statusText = "Warning";
+                            status = "completed";
 
                         }
 
                 %>
 
 
-                <tr>
+                    <tr>
 
+                        <td>
+                            <%= i++ %>
+                        </td>
 
-                    <!-- NUMBER -->
 
-                    <td>
+                        <td>
+                            <%= r.getItemName() %>
+                        </td>
 
-                        <%=i++%>
 
-                    </td>
+                        <td>
+                            <%= r.getQuantity() %>
+                        </td>
 
 
-                    <!-- PRODUCT ID -->
+                        <td>
+                            <%= r.getReorderDate() %>
+                        </td>
 
-                    <td>
 
-                        <%=item.getItemId()%>
+                        <td>
 
-                    </td>
+                            <span class="badge <%= status %>">
 
+                                <i class="fa-solid
+                                <%
 
-                    <!-- PRODUCT NAME -->
+                                if("requested".equals(status)){
 
-                    <td>
+                                %>
+                                    fa-paper-plane
+                                <%
 
-                        <%=item.getItemName()%>
+                                }
+                                else if("processing".equals(status)){
 
-                    </td>
+                                %>
+                                    fa-spinner
+                                <%
 
+                                }
+                                else{
 
-                    <!-- CURRENT QUANTITY -->
+                                %>
+                                    fa-circle-check
+                                <%
 
-                    <td>
+                                }
 
-                        <%=item.getQuantity()%>
+                                %>
+                                "></i>
 
-                    </td>
+                                <%= r.getStatus() %>
 
+                            </span>
 
-                    <!-- SAFETY STOCK -->
+                        </td>
 
-                    <td>
-
-                        <%=item.getSafetyStock()%>
-
-                    </td>
-
-
-                    <!-- REORDER QUANTITY -->
-
-                    <td>
-
-                        <%=item.getReorderLevel()-item.getQuantity()%>
-
-                    </td>
-
-
-                    <!-- STATUS -->
-
-                    <td>
-
-                        <span class="badge <%=statusClass%>">
-
-
-                            <i class="fa-solid
-
-                            <%
-
-                            if("low".equals(statusClass)){
-
-                            %>
-
-                                fa-triangle-exclamation
-
-                            <%
-
-                            }
-
-                            else if("critical".equals(statusClass)){
-
-                            %>
-
-                                fa-circle-exclamation
-
-                            <%
-
-                            }
-
-                            else{
-
-                            %>
-
-                                fa-circle-info
-
-                            <%
-
-                            }
-
-                            %>
-
-                            "></i>
-
-
-                            <%=statusText%>
-
-
-                        </span>
-
-                    </td>
-
-
-                    <!-- ACTION -->
-
-                    <td>
-
-
-                        <form action="ReorderServlet"
-                              method="post"
-                              style="margin:0;">
-
-
-                            <input type="hidden"
-                                   name="itemId"
-                                   value="<%=item.getItemId()%>">
-
-
-                            <input type="hidden"
-                                   name="quantity"
-                                   value="<%=item.getReorderLevel()-item.getQuantity()%>">
-
-
-                            <button class="btn"
-                                    type="submit">
-
-
-                                <i class="fa-solid fa-paper-plane"></i>
-
-                                Reorder
-
-
-                            </button>
-
-
-                        </form>
-
-
-                    </td>
-
-
-                </tr>
+                    </tr>
 
 
                 <%
@@ -1354,30 +1041,25 @@ body::after,
                 %>
 
 
-                <!-- EMPTY STATE -->
+                    <tr>
 
-                <tr>
+                        <td colspan="5">
 
-                    <td colspan="8">
+                            <i class="fa-solid fa-box-open"
+                               style="
+                               font-size:28px;
+                               color:#B78A3A;
+                               display:block;
+                               margin-bottom:10px;
+                               ">
 
+                            </i>
 
-                        <i class="fa-solid fa-box-open"
-                           style="
-                           font-size:28px;
-                           color:#B78A3A;
-                           display:block;
-                           margin-bottom:10px;
-                           ">
+                            No reorder history available.
 
-                        </i>
+                        </td>
 
-
-                        No low stock products found
-
-
-                    </td>
-
-                </tr>
+                    </tr>
 
 
                 <%
@@ -1386,9 +1068,7 @@ body::after,
 
                 %>
 
-
                 </tbody>
-
 
             </table>
 

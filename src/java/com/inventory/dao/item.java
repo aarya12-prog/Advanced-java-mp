@@ -9,5 +9,9 @@ package com.inventory.dao;
  * @author aarya Thorat
  */
 class item {
+
+    static void setitem_name(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
