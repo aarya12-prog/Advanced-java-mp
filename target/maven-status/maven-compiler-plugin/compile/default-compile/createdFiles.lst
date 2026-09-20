@@ -1,0 +1,10 @@
+com\mycompany\inventorywebapp\Product.class
+com\mycompany\inventorywebapp\servlet\StockReportServlet.class
+com\mycompany\inventorywebapp\InventoryServlet.class
+com\mycompany\inventorywebapp\StockReportServlet.class
+com\mycompany\inventorywebapp\resources\JakartaEE10Resource.class
+com\mycompany\inventorywebapp\dao\StockDAO.class
+com\mycompany\inventorywebapp\DBConnection.class
+Inventory.class
+com\mycompany\inventorywebapp\servlet\StockMonitoringServlet.class
+com\mycompany\inventorywebapp\model\StockItem.class
