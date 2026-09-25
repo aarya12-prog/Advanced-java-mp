@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login Successful</title>
+
+    <link rel="stylesheet" href="success.css">
+</head>
+
+<body>
+
+    <div class="success-container">
+
+        <div class="success-box">
+
+            <!-- Success Icon -->
+            <div class="success-icon">✓</div>
+
+            <h1>Login Successful!</h1>
+
+            <p class="welcome">
+                Welcome to the Inventory Control System.
+            </p>
+
+            <p class="message">
+                You have successfully logged into your account.
+            </p>
+
+            <button onclick="continueToDashboard()">
+                Continue
+            </button>
+
+            <p class="footer">
+                Inventory Control System © 2026
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script>
+        function continueToDashboard() {
+            window.location.href = "index.jsp";
+        }
+    </script>
+
+</body>
+</html>

@@ -22,14 +22,7 @@
     </context-param>
 
     <!-- 1. Authentication & User Management Servlets -->
-    <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.inventory.servlet.LoginServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
+  
 
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
@@ -90,5 +83,8 @@
         <error-code>500</error-code>
         <location>/error500.jsp</location>
     </error-page>
+    <welcome-file-list>
+    <welcome-file>login.html</welcome-file>
+</welcome-file-list>
 
 </web-app>

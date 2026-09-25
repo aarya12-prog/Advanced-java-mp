@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Invalid Login</title>
+
+    <link rel="stylesheet" href="invalid.css">
+</head>
+
+<body>
+
+    <div class="invalid-container">
+
+        <div class="invalid-icon">✕</div>
+
+        <h1>Invalid Login</h1>
+
+        <p>Username or password is incorrect.</p>
+
+        <button onclick="tryAgain()">
+            Try Again
+        </button>
+
+    </div>
+
+    <script>
+        function tryAgain() {
+            window.location.href = "login.html";
+        }
+    </script>
+
+</body>
+</html>

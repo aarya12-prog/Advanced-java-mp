@@ -1,0 +1,334 @@
+/* ================================
+   INVENTORY CONTROL SYSTEM
+   LOGIN UI
+   ================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    /* Dark background similar to reference */
+    background-color: #160d0d;
+
+    /* Geometric gold pattern */
+    background-image:
+        linear-gradient(30deg, rgba(183, 139, 55, 0.25) 12%, transparent 12.5%, transparent 87%, rgba(183, 139, 55, 0.25) 87.5%, rgba(183, 139, 55, 0.25)),
+        linear-gradient(150deg, rgba(183, 139, 55, 0.25) 12%, transparent 12.5%, transparent 87%, rgba(183, 139, 55, 0.25) 87.5%, rgba(183, 139, 55, 0.25)),
+        linear-gradient(30deg, rgba(183, 139, 55, 0.25) 12%, transparent 12.5%, transparent 87%, rgba(183, 139, 55, 0.25) 87.5%, rgba(183, 139, 55, 0.25)),
+        linear-gradient(150deg, rgba(183, 139, 55, 0.25) 12%, transparent 12.5%, transparent 87%, rgba(183, 139, 55, 0.25) 87.5%, rgba(183, 139, 55, 0.25)),
+        linear-gradient(60deg, rgba(183, 139, 55, 0.18) 25%, transparent 25.5%, transparent 75%, rgba(183, 139, 55, 0.18) 75%);
+        
+    background-size: 90px 155px;
+    background-position: 0 0, 0 0, 45px 78px, 45px 78px, 0 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+
+/* ================================
+   MAIN LOGIN CONTAINER
+   ================================ */
+
+.login-container {
+    width: 100%;
+    max-width: 980px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ================================
+   LOGIN BOX
+   ================================ */
+
+.login-box {
+    width: 450px;
+    padding: 42px 48px;
+
+    background: rgba(248, 245, 237, 0.97);
+
+    border: 1px solid rgba(183, 139, 55, 0.65);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.55),
+        0 0 35px rgba(183, 139, 55, 0.12);
+
+    position: relative;
+}
+
+
+/* Gold top line */
+
+.login-box::before {
+    content: "";
+    position: absolute;
+
+    top: 0;
+    left: 35px;
+    right: 35px;
+
+    height: 4px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #b78b37,
+        #d4af61,
+        #b78b37,
+        transparent
+    );
+
+    border-radius: 0 0 10px 10px;
+}
+
+
+/* ================================
+   TITLE
+   ================================ */
+
+.login-box h1 {
+    text-align: center;
+
+    color: #6d1738;
+
+    font-size: 31px;
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+
+    margin-bottom: 5px;
+}
+
+
+/* Subtitle */
+
+.subtitle {
+    text-align: center;
+
+    color: #9a7431;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 32px;
+}
+
+
+/* ================================
+   FORM
+   ================================ */
+
+form {
+    width: 100%;
+}
+
+
+/* Labels */
+
+form > label {
+    display: block;
+
+    color: #542033;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+
+/* ================================
+   INPUT FIELDS
+   ================================ */
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 15px;
+
+    margin-bottom: 20px;
+
+    background: #fffdf8;
+
+    border: 1px solid #d6c39a;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    color: #3b2028;
+
+    font-size: 14px;
+
+    transition: all 0.25s ease;
+}
+
+
+/* Placeholder */
+
+input::placeholder {
+    color: #a59b8e;
+}
+
+
+/* Input focus */
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #7c1f43;
+
+    box-shadow:
+        0 0 0 3px rgba(124, 31, 67, 0.10);
+
+    background: #ffffff;
+}
+
+
+/* ================================
+   REMEMBER ME
+   ================================ */
+
+.remember {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 2px 0 25px;
+}
+
+
+.remember input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+
+    accent-color: #7c1f43;
+
+    cursor: pointer;
+}
+
+
+.remember label {
+    color: #665b50;
+
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+
+/* ================================
+   LOGIN BUTTON
+   ================================ */
+
+button[type="submit"] {
+    width: 100%;
+
+    height: 48px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #7c1f43;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 12px rgba(124, 31, 67, 0.25);
+
+    transition: all 0.25s ease;
+}
+
+
+/* Hover */
+
+button[type="submit"]:hover {
+    background: #641733;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(124, 31, 67, 0.35);
+}
+
+
+/* Click */
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+
+/* ================================
+   FOOTER
+   ================================ */
+
+.footer {
+    text-align: center;
+
+    color: #8b8176;
+
+    font-size: 11px;
+
+    margin-top: 28px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #ddd2bd;
+}
+
+
+/* ================================
+   RESPONSIVE DESIGN
+   ================================ */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 20px;
+    }
+
+    .login-box {
+        width: 100%;
+
+        padding: 35px 25px;
+
+        border-radius: 18px;
+    }
+
+    .login-box h1 {
+        font-size: 26px;
+    }
+
+    .subtitle {
+        margin-bottom: 27px;
+    }
+}

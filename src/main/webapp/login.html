@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Hardware & Electronics Inventory System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #edf5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #26343b;
+        }
+
+        .login-wrapper {
+            width: 92%;
+            max-width: 1100px;
+            min-height: 650px;
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 18px 50px rgba(40, 88, 109, 0.18);
+        }
+
+        /* ================= LEFT SIDE ================= */
+
+        .login-section {
+            width: 52%;
+            padding: 55px 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #ffffff;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 45px;
+        }
+
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+            background: #28586d;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-icon svg {
+            width: 27px;
+            height: 27px;
+            stroke: white;
+        }
+
+        .brand-text h2 {
+            color: #28586d;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .brand-text p {
+            color: #78909c;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .login-heading {
+            margin-bottom: 30px;
+        }
+
+        .login-heading h1 {
+            font-size: 32px;
+            color: #26343b;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .login-heading p {
+            color: #78909c;
+            font-size: 14px;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #43545d;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper svg {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 19px;
+            height: 19px;
+            stroke: #78909c;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            height: 50px;
+            border: 1px solid #d6e2e7;
+            border-radius: 10px;
+            outline: none;
+            padding: 0 45px;
+            font-size: 14px;
+            color: #26343b;
+            background: #fbfdfe;
+            transition: 0.2s ease;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #28586d;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(40, 88, 109, 0.08);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .password-toggle svg {
+            position: static;
+            transform: none;
+            width: 19px;
+            height: 19px;
+        }
+
+        /* ================= OPTIONS ================= */
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 8px 0 25px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #60747d;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .remember input {
+            width: 15px;
+            height: 15px;
+            accent-color: #28586d;
+            cursor: pointer;
+        }
+
+        .forgot {
+            color: #28586d;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .forgot:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= LOGIN BUTTON ================= */
+
+        .login-btn {
+            width: 100%;
+            height: 51px;
+            border: none;
+            border-radius: 10px;
+            background: #28586d;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s ease;
+            box-shadow: 0 7px 16px rgba(40, 88, 109, 0.20);
+        }
+
+        .login-btn:hover {
+            background: #214b5e;
+            transform: translateY(-1px);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ================= SECURITY TEXT ================= */
+
+        .security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            margin-top: 22px;
+            color: #8a9ba3;
+            font-size: 12px;
+        }
+
+        .security-note svg {
+            width: 15px;
+            height: 15px;
+            stroke: #28586d;
+        }
+
+        /* ================= RIGHT SIDE ================= */
+
+        .illustration-section {
+            width: 48%;
+            background: #eaf4f8;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .circle-one {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.55);
+            top: -150px;
+            right: -120px;
+        }
+
+        .circle-two {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(40, 88, 109, 0.06);
+            bottom: -130px;
+            left: -100px;
+        }
+
+        .illustration-content {
+            position: relative;
+            z-index: 2;
+            width: 80%;
+            text-align: center;
+        }
+
+        .illustration-content h2 {
+            color: #28586d;
+            font-size: 27px;
+            margin-bottom: 9px;
+        }
+
+        .illustration-content p {
+            color: #60747d;
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 330px;
+            margin: 0 auto 35px;
+        }
+
+        /* ================= CUSTOM ILLUSTRATION ================= */
+
+        .illustration {
+            width: 100%;
+            max-width: 390px;
+            height: 290px;
+            margin: auto;
+            position: relative;
+        }
+
+        .desk {
+            position: absolute;
+            width: 300px;
+            height: 16px;
+            background: #28586d;
+            border-radius: 8px;
+            bottom: 55px;
+            left: 45px;
+        }
+
+        .desk-leg-left,
+        .desk-leg-right {
+            position: absolute;
+            width: 12px;
+            height: 95px;
+            background: #537d8d;
+            bottom: -90px;
+            border-radius: 5px;
+        }
+
+        .desk-leg-left {
+            left: 75px;
+        }
+
+        .desk-leg-right {
+            right: 75px;
+        }
+
+        .monitor {
+            position: absolute;
+            width: 145px;
+            height: 100px;
+            background: white;
+            border: 8px solid #28586d;
+            border-radius: 10px;
+            left: 105px;
+            top: 55px;
+            box-shadow: 0 8px 20px rgba(40, 88, 109, 0.12);
+        }
+
+        .monitor-screen {
+            width: 100%;
+            height: 100%;
+            padding: 12px;
+            background: #edf5f9;
+        }
+
+        .screen-line {
+            height: 7px;
+            background: #6c9aaa;
+            border-radius: 4px;
+            margin-bottom: 9px;
+        }
+
+        .screen-line.short {
+            width: 60%;
+        }
+
+        .screen-box {
+            width: 45%;
+            height: 35px;
+            background: #d3e6ed;
+            border-radius: 5px;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .monitor-stand {
+            position: absolute;
+            width: 15px;
+            height: 38px;
+            background: #28586d;
+            left: 165px;
+            top: 150px;
+        }
+
+        .monitor-base {
+            position: absolute;
+            width: 70px;
+            height: 10px;
+            border-radius: 6px;
+            background: #28586d;
+            left: 137px;
+            top: 184px;
+        }
+
+        /* Person */
+
+        .person-head {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #f0c5a2;
+            right: 45px;
+            top: 45px;
+        }
+
+        .person-hair {
+            position: absolute;
+            width: 55px;
+            height: 27px;
+            border-radius: 30px 30px 5px 5px;
+            background: #26343b;
+            right: 42px;
+            top: 38px;
+        }
+
+        .person-body {
+            position: absolute;
+            width: 92px;
+            height: 115px;
+            border-radius: 45px 45px 10px 10px;
+            background: #28586d;
+            right: 25px;
+            bottom: 55px;
+        }
+
+        .person-arm {
+            position: absolute;
+            width: 85px;
+            height: 18px;
+            background: #f0c5a2;
+            border-radius: 15px;
+            right: 80px;
+            top: 125px;
+            transform: rotate(-20deg);
+        }
+
+        .person-hand {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: #f0c5a2;
+            border-radius: 50%;
+            right: 145px;
+            top: 103px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .copyright {
+            margin-top: 35px;
+            text-align: center;
+            color: #a0adb3;
+            font-size: 11px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 850px) {
+            .login-wrapper {
+                width: 95%;
+                min-height: auto;
+            }
+
+            .illustration-section {
+                display: none;
+            }
+
+            .login-section {
+                width: 100%;
+                padding: 45px 55px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .login-wrapper {
+                width: 100%;
+                min-height: 100vh;
+                border-radius: 0;
+            }
+
+            .login-section {
+                padding: 35px 25px;
+            }
+
+            .brand {
+                margin-bottom: 35px;
+            }
+
+            .login-heading h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-wrapper">
+
+    <!-- ================= LEFT LOGIN PANEL ================= -->
+
+    <div class="login-section">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke-width="2">
+                    <path d="M3 9.5L12 4l9 5.5"/>
+                    <path d="M5 10v9h14v-9"/>
+                    <path d="M9 19v-5h6v5"/>
+                    <path d="M8 10h.01"/>
+                    <path d="M12 10h.01"/>
+                    <path d="M16 10h.01"/>
+                </svg>
+            </div>
+
+            <div class="brand-text">
+                <h2>Hardware Inventory</h2>
+                <p>Management System</p>
+            </div>
+
+        </div>
+
+
+        <div class="login-heading">
+            <h1>Welcome Back</h1>
+            <p>Sign in to manage your inventory</p>
+        </div>
+
+
+        <!-- LOGIN FORM -->
+
+        <form action="index.jsp?action=login" method="post">
+
+            <!-- Username -->
+
+            <div class="form-group">
+
+                <label for="username">
+                    Email Address / Username
+                </label>
+
+                <div class="input-wrapper">
+
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke-width="2">
+                        <path d="M20 21a8 8 0 0 0-16 0"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <!-- Password -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke-width="2">
+                        <rect x="4" y="10"
+                              width="16"
+                              height="10"
+                              rx="2"/>
+                        <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+                    </svg>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required>
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        onclick="togglePassword()">
+
+                        <svg id="eyeIcon"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="#78909c"
+                             stroke-width="2">
+                            <path d="M2 12s3.5-6 10-6
+                                     10 6 10 6-3.5 6-10 6
+                                     -10-6-10-6z"/>
+                            <circle cx="12"
+                                    cy="12"
+                                    r="2.5"/>
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Options -->
+
+            <div class="form-options">
+
+                <label class="remember">
+                    <input
+                        type="checkbox"
+                        name="remember">
+
+                    <span>Keep me logged in</span>
+                </label>
+
+                <a href="#" class="forgot">
+                    Forgot Password?
+                </a>
+
+            </div>
+
+
+            <!-- Login -->
+
+            <button type="submit" class="login-btn">
+                Log In
+            </button>
+
+        </form>
+
+
+        <!-- Security -->
+
+        <div class="security-note">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke-width="2">
+                <rect x="4" y="10"
+                      width="16"
+                      height="10"
+                      rx="2"/>
+                <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+            </svg>
+
+            Secure inventory management system
+
+        </div>
+
+
+        <div class="copyright">
+            © 2026 Hardware & Electronics Inventory System
+        </div>
+
+    </div>
+
+
+    <!-- ================= RIGHT ILLUSTRATION ================= -->
+
+    <div class="illustration-section">
+
+        <div class="circle-one"></div>
+        <div class="circle-two"></div>
+
+        <div class="illustration-content">
+
+            <h2>Manage Smarter</h2>
+
+            <p>
+                Track products, monitor stock levels,
+                manage reorders and keep your inventory
+                organized in one place.
+            </p>
+
+
+            <div class="illustration">
+
+                <!-- Monitor -->
+
+                <div class="monitor">
+
+                    <div class="monitor-screen">
+
+                        <div class="screen-line"></div>
+                        <div class="screen-line short"></div>
+
+                        <div class="screen-box"></div>
+                        <div class="screen-box"></div>
+
+                    </div>
+
+                </div>
+
+                <div class="monitor-stand"></div>
+                <div class="monitor-base"></div>
+
+
+                <!-- Desk -->
+
+                <div class="desk"></div>
+
+                <div class="desk-leg-left"></div>
+                <div class="desk-leg-right"></div>
+
+
+                <!-- Person -->
+
+                <div class="person-head"></div>
+                <div class="person-hair"></div>
+                <div class="person-body"></div>
+                <div class="person-arm"></div>
+                <div class="person-hand"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function togglePassword() {
+
+    const password =
+        document.getElementById("password");
+
+    const eye =
+        document.getElementById("eyeIcon");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        eye.innerHTML = `
+            <path d="M3 3l18 18"/>
+            <path d="M10.6 10.6a2 2 0 0 0
+                     2.8 2.8"/>
+            <path d="M9.9 5.1A10.8 10.8
+                     0 0 1 12 5
+                     c6.5 0 10 7 10 7
+                     a18.5 18.5 0 0 1-3.2 3.9"/>
+            <path d="M6.2 6.2C3.5 8
+                     2 12 2 12
+                     s3.5 7 10 7
+                     c1.7 0 3.2-.4 4.5-1"/>
+        `;
+
+    } else {
+
+        password.type = "password";
+
+        eye.innerHTML = `
+            <path d="M2 12s3.5-6 10-6
+                     10 6 10 6-3.5 6-10 6
+                     -10-6-10-6z"/>
+            <circle cx="12"
+                    cy="12"
+                    r="2.5"/>
+        `;
+    }
+}
+
+</script>
+
+</body>
+</html>
